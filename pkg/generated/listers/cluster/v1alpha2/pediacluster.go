@@ -4,7 +4,7 @@ package v1alpha2
 
 import (
 	v1alpha2 "github.com/clusterpedia-io/api/cluster/v1alpha2"
-	"k8s.io/apimachinery/pkg/api/errors"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/client-go/tools/cache"
 )
@@ -46,7 +46,7 @@ func (s *pediaClusterLister) Get(name string) (*v1alpha2.PediaCluster, error) {
 		return nil, err
 	}
 	if !exists {
-		return nil, errors.NewNotFound(v1alpha2.Resource("pediacluster"), name)
+		return nil, apierrors.NewNotFound(v1alpha2.Resource("pediacluster"), name)
 	}
 	return obj.(*v1alpha2.PediaCluster), nil
 }

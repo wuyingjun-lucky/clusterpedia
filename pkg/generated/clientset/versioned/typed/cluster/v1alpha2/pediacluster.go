@@ -7,11 +7,12 @@ import (
 	"time"
 
 	v1alpha2 "github.com/clusterpedia-io/api/cluster/v1alpha2"
-	scheme "github.com/clusterpedia-io/clusterpedia/pkg/generated/clientset/versioned/scheme"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	rest "k8s.io/client-go/rest"
+
+	scheme "github.com/clusterpedia-io/clusterpedia/pkg/generated/clientset/versioned/scheme"
 )
 
 // PediaClustersGetter has a method to return a PediaClusterInterface.
@@ -22,15 +23,15 @@ type PediaClustersGetter interface {
 
 // PediaClusterInterface has methods to work with PediaCluster resources.
 type PediaClusterInterface interface {
-	Create(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts v1.CreateOptions) (*v1alpha2.PediaCluster, error)
-	Update(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts v1.UpdateOptions) (*v1alpha2.PediaCluster, error)
-	UpdateStatus(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts v1.UpdateOptions) (*v1alpha2.PediaCluster, error)
-	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
-	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
-	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha2.PediaCluster, error)
-	List(ctx context.Context, opts v1.ListOptions) (*v1alpha2.PediaClusterList, error)
-	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
-	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha2.PediaCluster, err error)
+	Create(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts metav1.CreateOptions) (*v1alpha2.PediaCluster, error)
+	Update(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts metav1.UpdateOptions) (*v1alpha2.PediaCluster, error)
+	UpdateStatus(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts metav1.UpdateOptions) (*v1alpha2.PediaCluster, error)
+	Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error
+	DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error
+	Get(ctx context.Context, name string, opts metav1.GetOptions) (*v1alpha2.PediaCluster, error)
+	List(ctx context.Context, opts metav1.ListOptions) (*v1alpha2.PediaClusterList, error)
+	Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error)
+	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1alpha2.PediaCluster, err error)
 	PediaClusterExpansion
 }
 
@@ -47,7 +48,7 @@ func newPediaClusters(c *ClusterV1alpha2Client) *pediaClusters {
 }
 
 // Get takes name of the pediaCluster, and returns the corresponding pediaCluster object, and an error if there is any.
-func (c *pediaClusters) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha2.PediaCluster, err error) {
+func (c *pediaClusters) Get(ctx context.Context, name string, options metav1.GetOptions) (result *v1alpha2.PediaCluster, err error) {
 	result = &v1alpha2.PediaCluster{}
 	err = c.client.Get().
 		Resource("pediaclusters").
@@ -59,7 +60,7 @@ func (c *pediaClusters) Get(ctx context.Context, name string, options v1.GetOpti
 }
 
 // List takes label and field selectors, and returns the list of PediaClusters that match those selectors.
-func (c *pediaClusters) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha2.PediaClusterList, err error) {
+func (c *pediaClusters) List(ctx context.Context, opts metav1.ListOptions) (result *v1alpha2.PediaClusterList, err error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -75,7 +76,7 @@ func (c *pediaClusters) List(ctx context.Context, opts v1.ListOptions) (result *
 }
 
 // Watch returns a watch.Interface that watches the requested pediaClusters.
-func (c *pediaClusters) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
+func (c *pediaClusters) Watch(ctx context.Context, opts metav1.ListOptions) (watch.Interface, error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -89,7 +90,7 @@ func (c *pediaClusters) Watch(ctx context.Context, opts v1.ListOptions) (watch.I
 }
 
 // Create takes the representation of a pediaCluster and creates it.  Returns the server's representation of the pediaCluster, and an error, if there is any.
-func (c *pediaClusters) Create(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts v1.CreateOptions) (result *v1alpha2.PediaCluster, err error) {
+func (c *pediaClusters) Create(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts metav1.CreateOptions) (result *v1alpha2.PediaCluster, err error) {
 	result = &v1alpha2.PediaCluster{}
 	err = c.client.Post().
 		Resource("pediaclusters").
@@ -101,7 +102,7 @@ func (c *pediaClusters) Create(ctx context.Context, pediaCluster *v1alpha2.Pedia
 }
 
 // Update takes the representation of a pediaCluster and updates it. Returns the server's representation of the pediaCluster, and an error, if there is any.
-func (c *pediaClusters) Update(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts v1.UpdateOptions) (result *v1alpha2.PediaCluster, err error) {
+func (c *pediaClusters) Update(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts metav1.UpdateOptions) (result *v1alpha2.PediaCluster, err error) {
 	result = &v1alpha2.PediaCluster{}
 	err = c.client.Put().
 		Resource("pediaclusters").
@@ -115,7 +116,7 @@ func (c *pediaClusters) Update(ctx context.Context, pediaCluster *v1alpha2.Pedia
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *pediaClusters) UpdateStatus(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts v1.UpdateOptions) (result *v1alpha2.PediaCluster, err error) {
+func (c *pediaClusters) UpdateStatus(ctx context.Context, pediaCluster *v1alpha2.PediaCluster, opts metav1.UpdateOptions) (result *v1alpha2.PediaCluster, err error) {
 	result = &v1alpha2.PediaCluster{}
 	err = c.client.Put().
 		Resource("pediaclusters").
@@ -129,7 +130,7 @@ func (c *pediaClusters) UpdateStatus(ctx context.Context, pediaCluster *v1alpha2
 }
 
 // Delete takes name of the pediaCluster and deletes it. Returns an error if one occurs.
-func (c *pediaClusters) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
+func (c *pediaClusters) Delete(ctx context.Context, name string, opts metav1.DeleteOptions) error {
 	return c.client.Delete().
 		Resource("pediaclusters").
 		Name(name).
@@ -139,7 +140,7 @@ func (c *pediaClusters) Delete(ctx context.Context, name string, opts v1.DeleteO
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *pediaClusters) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+func (c *pediaClusters) DeleteCollection(ctx context.Context, opts metav1.DeleteOptions, listOpts metav1.ListOptions) error {
 	var timeout time.Duration
 	if listOpts.TimeoutSeconds != nil {
 		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
@@ -154,7 +155,7 @@ func (c *pediaClusters) DeleteCollection(ctx context.Context, opts v1.DeleteOpti
 }
 
 // Patch applies the patch and returns the patched pediaCluster.
-func (c *pediaClusters) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha2.PediaCluster, err error) {
+func (c *pediaClusters) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts metav1.PatchOptions, subresources ...string) (result *v1alpha2.PediaCluster, err error) {
 	result = &v1alpha2.PediaCluster{}
 	err = c.client.Patch(pt).
 		Resource("pediaclusters").

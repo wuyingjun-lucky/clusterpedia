@@ -13,6 +13,7 @@ require (
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.7.0
+	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gorm.io/datatypes v1.0.3
 	gorm.io/driver/mysql v1.2.0
@@ -23,14 +24,14 @@ require (
 	k8s.io/apimachinery v0.24.1
 	k8s.io/apiserver v0.0.0
 	k8s.io/client-go v0.24.1
-	k8s.io/code-generator v0.24.1
+	k8s.io/code-generator v0.24.1 // indirect
 	k8s.io/component-base v0.24.1
 	k8s.io/klog/v2 v2.60.1
 	k8s.io/kube-aggregator v0.0.0
 	k8s.io/kubernetes v1.24.1
 	k8s.io/utils v0.0.0-20220210201930-3a6ce19ff2f9
 	sigs.k8s.io/controller-runtime v0.12.1
-	sigs.k8s.io/controller-tools v0.9.0
+	sigs.k8s.io/controller-tools v0.9.0 // indirect
 )
 
 replace (

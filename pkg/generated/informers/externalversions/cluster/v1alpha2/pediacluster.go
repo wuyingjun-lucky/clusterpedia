@@ -7,13 +7,14 @@ import (
 	time "time"
 
 	clusterv1alpha2 "github.com/clusterpedia-io/api/cluster/v1alpha2"
-	versioned "github.com/clusterpedia-io/clusterpedia/pkg/generated/clientset/versioned"
-	internalinterfaces "github.com/clusterpedia-io/clusterpedia/pkg/generated/informers/externalversions/internalinterfaces"
-	v1alpha2 "github.com/clusterpedia-io/clusterpedia/pkg/generated/listers/cluster/v1alpha2"
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
 	cache "k8s.io/client-go/tools/cache"
+
+	versioned "github.com/clusterpedia-io/clusterpedia/pkg/generated/clientset/versioned"
+	internalinterfaces "github.com/clusterpedia-io/clusterpedia/pkg/generated/informers/externalversions/internalinterfaces"
+	v1alpha2 "github.com/clusterpedia-io/clusterpedia/pkg/generated/listers/cluster/v1alpha2"
 )
 
 // PediaClusterInformer provides access to a shared informer and lister for
@@ -41,13 +42,13 @@ func NewPediaClusterInformer(client versioned.Interface, resyncPeriod time.Durat
 func NewFilteredPediaClusterInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
 	return cache.NewSharedIndexInformer(
 		&cache.ListWatch{
-			ListFunc: func(options v1.ListOptions) (runtime.Object, error) {
+			ListFunc: func(options metav1.ListOptions) (runtime.Object, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
 				return client.ClusterV1alpha2().PediaClusters().List(context.TODO(), options)
 			},
-			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
+			WatchFunc: func(options metav1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}

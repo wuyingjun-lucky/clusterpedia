@@ -6,8 +6,9 @@ import (
 	"net/http"
 
 	v1alpha2 "github.com/clusterpedia-io/api/cluster/v1alpha2"
-	"github.com/clusterpedia-io/clusterpedia/pkg/generated/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
+
+	"github.com/clusterpedia-io/clusterpedia/pkg/generated/clientset/versioned/scheme"
 )
 
 type ClusterV1alpha2Interface interface {
